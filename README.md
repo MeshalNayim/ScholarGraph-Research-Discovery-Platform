@@ -45,7 +45,6 @@ cp .env.example .env
 The ingestion pipeline prefers Parquet for speed and convenience. Two common options:
 
 - **Full dataset**: `data/raw/dblp-v10.parquet` (already generated from the CSV)
-- **Sample dataset**: `data/raw/dblp-v10-sample.parquet` (50k-row subset for fast dev)
 
 You can still pass a CSV path; the code will detect the extension and fall back to CSV reading when needed.
 
@@ -57,12 +56,6 @@ Examples:
 
 ```bash
 python3 -m pipeline.cli --csv data/raw/dblp-v10.parquet --limit 5000
-```
-
-- From the **50k sample Parquet**:
-
-```bash
-python3 -m pipeline.cli --csv data/raw/dblp-v10-sample.parquet --limit 50000
 ```
 
 If you want to **wipe and reload everything fresh** (all three stores), add `--truncate` to either command:

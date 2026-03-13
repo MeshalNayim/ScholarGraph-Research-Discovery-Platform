@@ -1,0 +1,666 @@
+venueId,venueName
+V1,ACM Sigarch Computer Architecture News
+V2,ACM Sigsoft Software Engineering Notes
+V3,ACM Transactions in Embedded Computing Systems
+V4,ACM Transactions on Architecture and Code Optimization
+V5,ACM Transactions on Autonomous and Adaptive Systems
+V6,ACM Transactions on Computer Systems
+V7,ACM Transactions on Graphics
+V8,ACM Transactions on Internet Technology
+V9,ACM Transactions on Knowledge Discovery From Data
+V10,"ACM Transactions on Multimedia Computing, Communications, and Applications"
+V11,ACM Transactions on Sensor Networks
+V12,ACM Transactions on Speech and Language Processing
+V13,ACM Transactions on Storage
+V14,Ad Hoc & Sensor Wireless Networks
+V15,Advances in Computational Mathematics
+V16,Advances in Software Engineering
+V17,Algorithmica
+V18,Algorithms
+V19,Algorithms for Molecular Biology
+V20,Annals of Mathematics and Artificial Intelligence
+V21,Annals of Pure and Applied Logic
+V22,Artificial Intelligence
+V23,Artificial Intelligence and Law
+V24,Artificial Life
+V25,BMC Bioinformatics
+V26,BMC Medical Informatics and Decision Making
+V27,Behaviour & Information Technology
+V28,Bioinformatics
+V29,Biological Cybernetics
+V30,Circuits Systems and Signal Processing
+V31,Clei Electronic Journal
+V32,Cluster Computing
+V33,Cognitive Science
+V34,Computational Linguistics
+V35,Computer Aided Geometric Design
+V36,Computer Animation and Virtual Worlds
+V37,Computer Communications
+V38,Computer Graphics Forum
+V39,Computer Networks
+V40,Computer Vision and Image Understanding
+V41,Computers & Chemical Engineering
+V42,Computers & Operations Research
+V43,Computers in Education
+V44,Computing
+V45,Concurrency and Computation: Practice and Experience
+V46,Database
+V47,Decision Sciences
+V48,Discrete Applied Mathematics
+V49,EURASIP Journal on Advances in Signal Processing
+V50,Educational Technology & Society
+V51,Electronic Notes in Theoretical Computer Science
+V52,Electronic Proceedings in Theoretical Computer Science
+V53,Empirical Software Engineering
+V54,Engineering Applications of Artificial Intelligence
+V55,Environmental Modelling and Software
+V56,"Eurasip Journal on Audio, Speech, and Music Processing"
+V57,Eurasip Journal on Embedded Systems
+V58,Eurasip Journal on Image and Video Processing
+V59,Eurasip Journal on Information Security
+V60,Eurasip Journal on Wireless Communications and Networking
+V61,European Journal of Operational Research
+V62,Finance and Stochastics
+V63,Foundations of Computational Mathematics
+V64,Frontiers in Neuroinformatics
+V65,Frontiers in Neurorobotics
+V66,Frontiers in Neuroscience
+V67,Frontiers of Computer Science in China
+V68,Future Generation Computer Systems
+V69,Future Internet
+V70,IEEE Access
+V71,IEEE Cloud Computing
+V72,IEEE Communications Letters
+V73,IEEE Communications Magazine
+V74,IEEE Communications Surveys and Tutorials
+V75,IEEE Concurrency
+V76,IEEE Geoscience and Remote Sensing Letters
+V77,IEEE Internet Computing
+V78,IEEE Journal of Selected Topics in Signal Processing
+V79,IEEE Journal of Solid-state Circuits
+V80,IEEE Journal on Selected Areas in Communications
+V81,IEEE Micro
+V82,IEEE MultiMedia
+V83,IEEE Network
+V84,IEEE Parallel & Distributed Technology: Systems & Applications
+V85,IEEE Signal Processing Letters
+V86,IEEE Signal Processing Magazine
+V87,IEEE Systems Journal
+V88,IEEE Transactions on Aerospace and Electronic Systems
+V89,"IEEE Transactions on Audio, Speech, and Language Processing"
+V90,IEEE Transactions on Automatic Control
+V91,IEEE Transactions on Autonomous Mental Development
+V92,IEEE Transactions on Broadcasting
+V93,IEEE Transactions on Circuits and Systems I-regular Papers
+V94,IEEE Transactions on Circuits and Systems for Video Technology
+V95,IEEE Transactions on Cognitive Communications and Networking
+V96,IEEE Transactions on Communications
+V97,IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems
+V98,IEEE Transactions on Computers
+V99,IEEE Transactions on Consumer Electronics
+V100,IEEE Transactions on Control Systems and Technology
+V101,IEEE Transactions on Emerging Topics in Computing
+V102,IEEE Transactions on Evolutionary Computation
+V103,IEEE Transactions on Geoscience and Remote Sensing
+V104,IEEE Transactions on Human-Machine Systems
+V105,IEEE Transactions on Image Processing
+V106,IEEE Transactions on Industrial Electronics
+V107,IEEE Transactions on Information Forensics and Security
+V108,IEEE Transactions on Information Theory
+V109,IEEE Transactions on Instrumentation and Measurement
+V110,IEEE Transactions on Intelligent Transportation Systems
+V111,IEEE Transactions on Knowledge and Data Engineering
+V112,IEEE Transactions on Mobile Computing
+V113,IEEE Transactions on Multimedia
+V114,IEEE Transactions on Network and Service Management
+V115,IEEE Transactions on Neural Networks
+V116,IEEE Transactions on Parallel and Distributed Systems
+V117,IEEE Transactions on Pattern Analysis and Machine Intelligence
+V118,IEEE Transactions on Reliability
+V119,IEEE Transactions on Robotics
+V120,IEEE Transactions on Signal Processing
+V121,IEEE Transactions on Software Engineering
+V122,IEEE Transactions on Speech and Audio Processing
+V123,IEEE Transactions on Vehicular Technology
+V124,IEEE Transactions on Very Large Scale Integration Systems
+V125,IEEE Transactions on Visualization and Computer Graphics
+V126,IEEE Transactions on Wireless Communications
+V127,IEEE Wireless Communications
+V128,IEEE Wireless Communications Letters
+V129,IEEE\/ACM Transactions on Networking
+V130,IEICE Transactions on Communications
+V131,IEICE Transactions on Information and Systems
+V132,IET Biometrics
+V133,IET Software
+V134,Ibm Journal of Research and Development
+V135,Iet Communications
+V136,Iet Computers and Digital Techniques
+V137,Image and Vision Computing
+V138,Information & Software Technology
+V139,Information Economics and Policy
+V140,Information Retrieval
+V141,Information Sciences
+V142,Information Systems
+V143,Information Systems Research
+V144,Information Systems and E-business Management
+V145,Informs Journal on Computing
+V146,Innovations in Systems and Software Engineering
+V147,International Journal of Advanced Intelligence Paradigms
+V148,International Journal of Autonomous and Adaptive Communications Systems
+V149,International Journal of Communication Networks and Distributed Systems
+V150,International Journal of Communication Systems
+V151,International Journal of Computer Science & Applications
+V152,International Journal of Computer Vision
+V153,International Journal of Digital Curation
+V154,International Journal of Distributed Sensor Networks
+V155,International Journal of Geographical Information Science
+V156,International Journal of Humanoid Robotics
+V157,International Journal of Image and Graphics
+V158,International Journal of Information Acquisition
+V159,International Journal of Information Technology and Decision Making
+V160,International Journal of Intelligent Systems
+V161,International Journal of Medical Informatics
+V162,International Journal of Multimedia Information Retrieval
+V163,International Journal of Network Management
+V164,"International Journal of Parallel, Emergent and Distributed Systems"
+V165,International Journal of Pattern Recognition and Artificial Intelligence
+V166,International Journal of Satellite Communications and Networking
+V167,International Journal of Sensor Networks
+V168,International Journal of Social Robotics
+V169,International Journal of Systems Science
+V170,"International Journal of Wavelets, Multiresolution and Information Processing"
+V171,International Journal of Web Engineering and Technology
+V172,International Journal on Artificial Intelligence Tools
+V173,Internet Mathematics
+V174,Ipsj Transactions on System Lsi Design Methodology
+V175,Journal of Aerospace Computing Information and Communication
+V176,Journal of Artificial Intelligence Research
+V177,Journal of Bioinformatics and Computational Biology
+V178,Journal of Biomedical Semantics
+V179,Journal of Cognitive Neuroscience
+V180,Journal of Combinatorial Theory
+V181,Journal of Communications
+V182,Journal of Communications and Networks
+V183,Journal of Computational Neuroscience
+V184,Journal of Computational Physics
+V185,Journal of Computer Applications in Technology
+V186,Journal of Computer Assisted Learning
+V187,Journal of Computer Science and Technology
+V188,Journal of Convergence Information Technology
+V189,Journal of Discrete Algorithms
+V190,Journal of Electronic Imaging
+V191,Journal of Functional Programming
+V192,Journal of Information Science
+V193,Journal of Intelligent and Robotic Systems
+V194,Journal of Internet Services and Applications
+V195,Journal of Logic and Computation
+V196,"Journal of Logic, Language and Information"
+V197,Journal of Machine Learning Research
+V198,Journal of Management Information Systems
+V199,Journal of Mathematical Imaging and Vision
+V200,Journal of Multimedia
+V201,Journal of Network and Computer Applications
+V202,Journal of Networks
+V203,Journal of Parallel and Distributed Computing
+V204,Journal of Software: Evolution and Process
+V205,Journal of Systems Architecture
+V206,Journal of Systems and Software
+V207,Journal of the ACM
+V208,Journal of the American Medical Informatics Association
+V209,Journal of the Association for Information Science and Technology
+V210,Journal on Multimodal User Interfaces
+V211,Knowledge Based Systems
+V212,Ksii Transactions on Internet and Information Systems
+V213,Laser Physics Review
+V214,Lecture Notes in Computer Science
+V215,Machine Learning
+V216,Management Science
+V217,Manufacturing & Service Operations Management
+V218,Marketing Science
+V219,Mathematical Social Sciences
+V220,Mathematical Structures in Computer Science
+V221,Mathematics of Operations Research
+V222,Medical & Biological Engineering & Computing
+V223,Memetic Computing
+V224,Microprocessors and Microsystems
+V225,Mobile Computing and Communications Review
+V226,Mobile Networks and Applications
+V227,Multimedia Systems
+V228,Multimedia Tools and Applications
+V229,Natural Language Engineering
+V230,Neural Computation
+V231,NeuroImage
+V232,Neurocomputing
+V233,Nucleic Acids Research
+V234,Numerical Algorithms
+V235,Numerical Linear Algebra With Applications
+V236,Operating Systems Review
+V237,Operations Research
+V238,Operations Research Letters
+V239,PLOS Computational Biology
+V240,PLOS ONE
+V241,Pattern Recognition
+V242,Pattern Recognition Letters
+V243,Peer-to-peer Networking and Applications
+V244,Performance Evaluation
+V245,Presence: Teleoperators & Virtual Environments
+V246,Proceedings of SPIE
+V247,Proceedings of the IEEE
+V248,Queueing Systems
+V249,Real-time Systems
+V250,Remote Sensing
+V251,Robotics and Autonomous Systems
+V252,SIAM Journal on Scientific Computing
+V253,Science of Computer Programming
+V254,Scientific Programming
+V255,Security and Communication Networks
+V256,Sensors
+V257,Siam Journal on Financial Mathematics
+V258,Sigact News
+V259,Signal Processing-image Communication
+V260,"Signal, Image and Video Processing"
+V261,Sigplan Notices
+V262,Simulation
+V263,Software - Practice and Experience
+V264,"Software Testing, Verification & Reliability"
+V265,Speech Communication
+V266,Studia Informatica Universalis
+V267,Swarm Intelligence
+V268,Synthesis Lectures on Data Mining and Knowledge Discovery
+V269,Synthesis Lectures on Speech and Audio Processing
+V270,Telecommunication Systems
+V271,The Artist and Journal of Home Culture
+V272,The International Journal of Robotics Research
+V273,The Journal of Supercomputing
+V274,Theoretical Computer Science
+V275,Transportation Science
+V276,Wireless Communications and Mobile Computing
+V277,Wireless Networks
+V278,Wireless Personal Communications
+V279,World Wide Web
+V280,acm conference on hypertext
+V281,acm ieee international conference on mobile computing and networking
+V282,acm multimedia
+V283,acm sigplan symposium on principles and practice of parallel programming
+V284,acm special interest group on data communication
+V285,acm symposium on applied computing
+V286,acm/ieee international conference on mobile computing and networking
+V287,acm/ieee joint conference on digital libraries
+V288,ad hoc networks
+V289,adaptive agents and multi agents systems
+V290,adaptive agents and multi-agents systems
+V291,advanced data mining and applications
+V292,advanced information networking and applications
+V293,advanced video and signal based surveillance
+V294,advances in computing and communications
+V295,advances in multimedia
+V296,advances in social networks analysis and mining
+V297,algorithmic game theory
+V298,algorithmic learning theory
+V299,ambient intelligence
+V300,annual computer security applications conference
+V301,application specific systems architectures and processors
+V302,applications of natural language to data bases
+V303,arXiv: Computer Science and Game Theory
+V304,arXiv: Cryptography and Security
+V305,arXiv: Data Structures and Algorithms
+V306,arXiv: Human-Computer Interaction
+V307,arXiv: Information Theory
+V308,arXiv: Learning
+V309,arXiv: Networking and Internet Architecture
+V310,arXiv: Numerical Analysis
+V311,arXiv: Probability
+V312,arXiv: Social and Information Networks
+V313,architectural support for programming languages and operating systems
+V314,artificial intelligence methodology systems applications
+V315,asia and south pacific design automation conference
+V316,asia pacific conference on circuits and systems
+V317,asia pacific software engineering conference
+V318,asia-pacific bioinformatics conference
+V319,asia-pacific software engineering conference
+V320,asian conference on intelligent information and database systems
+V321,asian test symposium
+V322,aspect-oriented software development
+V323,australian software engineering conference
+V324,automated software engineering
+V325,bioinformatics and biomedicine
+V326,brazilian symposium on neural networks
+V327,british machine vision conference
+V328,"broadband communications, networks and systems"
+V329,canadian conference on computer and robot vision
+V330,canadian conference on electrical and computer engineering
+V331,cluster computing and the grid
+V332,collaboration technologies and systems
+V333,communication system software and middleware
+V334,communications and mobile computing
+V335,"compilers, architecture, and synthesis for embedded systems"
+V336,computational intelligence
+V337,computational intelligence and security
+V338,computational intelligence in robotics and automation
+V339,computational science and engineering
+V340,computer aided modeling and design of communication links and networks
+V341,computer analysis of images and patterns
+V342,computer and communications security
+V343,computer and information technology
+V344,computer graphics international
+V345,computer science and information engineering
+V346,computer science and software engineering
+V347,computer security foundations workshop
+V348,computer software and applications conference
+V349,computer vision and pattern recognition
+V350,computer-based medical systems
+V351,conference of the european chapter of the association for computational linguistics
+V352,conference of the international speech communication association
+V353,conference on computability in europe
+V354,"conference on creating, connecting and collaborating through computing"
+V355,conference on decision and control
+V356,conference on email and anti-spam
+V357,conference on emerging network experiment and technology
+V358,conference on information and knowledge management
+V359,conference on information sciences and systems
+V360,conference on innovative data systems research
+V361,conference on multimedia modeling
+V362,"conference on object-oriented programming systems, languages, and applications"
+V363,conference on recommender systems
+V364,conference on software maintenance and reengineering
+V365,congress on evolutionary computation
+V366,cooperative information systems
+V367,cross-language evaluation forum
+V368,custom integrated circuits conference
+V369,cyberworlds
+V370,data compression conference
+V371,data management for sensor networks
+V372,database and expert systems applications
+V373,database systems for advanced applications
+V374,databases in networked information systems
+V375,dependable systems and networks
+V376,design automation conference
+V377,"design, automation, and test in europe"
+V378,digital game and intelligent toy enhanced learning
+V379,digital identity management
+V380,digital image computing: techniques and applications
+V381,digital information and communication technology and its applications
+V382,digital systems design
+V383,distributed applications and interoperable systems
+V384,distributed event-based systems
+V385,distributed multimedia systems
+V386,dynamic languages symposium
+V387,electronic and mechanical engineering and information technology
+V388,electronic commerce
+V389,embedded and real-time computing systems and applications
+V390,embedded and ubiquitous computing
+V391,embedded software
+V392,emerging technologies and factory automation
+V393,empirical methods in natural language processing
+V394,enterprise distributed object computing
+V395,euromicro conference on real-time systems
+V396,european conference on computer systems
+V397,european conference on computer vision
+V398,european conference on parallel processing
+V399,european conference on symbolic and quantitative approaches to reasoning and uncertainty
+V400,european conference on web services
+V401,european symposium on programming
+V402,extending database technology
+V403,field-programmable logic and applications
+V404,field-programmable technology
+V405,formal methods
+V406,foundations of computer science
+V407,foundations of software engineering
+V408,foundations of software technology and theoretical computer science
+V409,frontier of computer science and technology
+V410,fuzzy systems and knowledge discovery
+V411,genetic and evolutionary computation conference
+V412,global communications conference
+V413,great lakes symposium on vlsi
+V414,grid and cooperative computing
+V415,grid and pervasive computing
+V416,grid computing
+V417,hawaii international conference on system sciences
+V418,high performance computing and communications
+V419,high performance computing systems and applications
+V420,high performance distributed computing
+V421,high performance embedded architectures and compilers
+V422,high performance switching and routing
+V423,high-performance computer architecture
+V424,hot topics in networks
+V425,human factors in computing systems
+V426,ieee automatic speech recognition and understanding workshop
+V427,ieee international conference on automatic face and gesture recognition
+V428,ieee international conference on cloud computing technology and science
+V429,ieee international conference on fuzzy systems
+V430,ieee international conference on high performance computing data and analytics
+V431,"ieee international conference on high performance computing, data, and analytics"
+V432,ieee international conference on pervasive computing and communications
+V433,ieee international conference on requirements engineering
+V434,ieee symposium on security and privacy
+V435,ieee virtual reality conference
+V436,ieee-ras international conference on humanoid robots
+V437,ifip international conference on theoretical computer science
+V438,indian international conference on artificial intelligence
+V439,information hiding
+V440,information processing in sensor networks
+V441,"information sciences, signal processing and their applications"
+V442,integer programming and combinatorial optimization
+V443,integrated network management
+V444,intelligent information systems
+V445,intelligent robots and systems
+V446,intelligent systems in molecular biology
+V447,international acm sigir conference on research and development in information retrieval
+V448,"international colloquium on automata, languages and programming"
+V449,international conference of the ieee engineering in medicine and biology society
+V450,international conference on acoustics speech and signal processing
+V451,"international conference on acoustics, speech, and signal processing"
+V452,international conference on advanced learning technologies
+V453,international conference on application of concurrency to system design
+V454,international conference on autonomic and autonomous systems
+V455,international conference on autonomic computing
+V456,international conference on biometrics
+V457,international conference on cloud computing
+V458,international conference on cluster computing
+V459,international conference on communications
+V460,international conference on computational linguistics
+V461,international conference on computer aided design
+V462,international conference on computer communications
+V463,international conference on computer communications and networks
+V464,international conference on computer design
+V465,international conference on computer graphics and interactive techniques
+V466,international conference on computer vision
+V467,international conference on computer vision systems
+V468,international conference on computing theory and applications
+V469,international conference on conceptual modeling
+V470,international conference on control and automation
+V471,"international conference on control, automation, robotics and vision"
+V472,international conference on data engineering
+V473,international conference on data mining
+V474,international conference on database theory
+V475,international conference on distributed computing systems
+V476,international conference on distributed smart cameras
+V477,international conference on document analysis and recognition
+V478,international conference on education technology and computer
+V479,international conference on embedded networked sensor systems
+V480,international conference on embedded software and systems
+V481,international conference on embedded wireless systems and networks
+V482,international conference on engineering of complex computer systems
+V483,international conference on functional programming
+V484,international conference on human computer interaction
+V485,international conference on image analysis and processing
+V486,international conference on image analysis and recognition
+V487,international conference on image and graphics
+V488,international conference on image processing
+V489,international conference on information systems
+V490,international conference on information technology new generations
+V491,international conference on information technology: new generations
+V492,international conference on intelligent computing
+V493,international conference on internet and web applications and services
+V494,international conference on machine learning
+V495,international conference on machine learning and applications
+V496,international conference on machine learning and cybernetics
+V497,international conference on management of data
+V498,"international conference on mobile systems, applications, and services"
+V499,international conference on multimedia and expo
+V500,international conference on multimodal interfaces
+V501,international conference on network protocols
+V502,international conference on networking
+V503,international conference on networks
+V504,international conference on networks and communications
+V505,international conference on parallel and distributed systems
+V506,international conference on parallel architectures and compilation techniques
+V507,international conference on parallel processing
+V508,international conference on pattern recognition
+V509,international conference on peer-to-peer computing
+V510,international conference on principles of distributed systems
+V511,international conference on program comprehension
+V512,international conference on quality software
+V513,international conference on robotics and automation
+V514,international conference on semantic computing
+V515,international conference on software engineering
+V516,international conference on software maintenance
+V517,international conference on supercomputing
+V518,international conference on telecommunications
+V519,international conference on tools with artificial intelligence
+V520,international conference on ultra modern telecommunications
+V521,international conference on web services
+V522,international conference on wireless communications and mobile computing
+V523,international geoscience and remote sensing symposium
+V524,international joint conference on natural language processing
+V525,international parallel and distributed processing symposium
+V526,international performance computing and communications conference
+V527,"international performance, computing, and communications conference"
+V528,international semantic web conference
+V529,international symposium on biomedical imaging
+V530,international symposium on circuits and systems
+V531,international symposium on computational intelligence and design
+V532,international symposium on computer and information sciences
+V533,international symposium on computer architecture
+V534,international symposium on computers and communications
+V535,international symposium on distributed computing
+V536,international symposium on information theory
+V537,international symposium on microarchitecture
+V538,international symposium on multimedia
+V539,international symposium on neural networks
+V540,international symposium on object component service oriented real time distributed computing
+V541,international symposium on object/component/service-oriented real-time distributed computing
+V542,international symposium on parallel and distributed processing and applications
+V543,international symposium on performance analysis of systems and software
+V544,international symposium on quality electronic design
+V545,international test conference
+V546,international workshop conference on parsing technologies
+V547,international workshop on quality of service
+V548,international workshop on the web and databases
+V549,international workshop/conference on parsing technologies
+V550,international world wide web conferences
+V551,internet measurement conference
+V552,language resources and evaluation
+V553,local computer networks
+V554,logic in computer science
+V555,machine vision applications
+V556,many-task computing on grids and supercomputers
+V557,mathematical foundations of computer science
+V558,measurement and modeling of computer systems
+V559,meeting of the association for computational linguistics
+V560,mexican international conference on artificial intelligence
+V561,mining software repositories
+V562,mobile ad hoc networking and computing
+V563,mobile ad-hoc and sensor networks
+V564,mobile adhoc and sensor systems
+V565,mobile data management
+V566,mobile lightweight wireless systems
+V567,modeling analysis and simulation of wireless and mobile systems
+V568,multimedia and ubiquitous engineering
+V569,multimedia information retrieval
+V570,multimedia signal processing
+V571,national conference on artificial intelligence
+V572,network and operating system support for digital audio and video
+V573,network and parallel computing
+V574,network computing and applications
+V575,network operations and management symposium
+V576,networked computing and advanced information management
+V577,networked systems design and implementation
+V578,neural information processing systems
+V579,new security paradigms workshop
+V580,"new technologies, mobility and security"
+V581,north american chapter of the association for computational linguistics
+V582,operating systems design and implementation
+V583,pacific conference on computer graphics and applications
+V584,pacific rim international conference on artificial intelligence
+V585,pacific rim international symposium on dependable computing
+V586,parallel and distributed computing: applications and technologies
+V587,parallel computing
+V588,parallel problem solving from nature
+V589,"parallel, distributed and network-based processing"
+V590,partial evaluation and semantic-based program manipulation
+V591,passive and active network measurement
+V592,personal satellite services
+V593,"personal, indoor and mobile radio communications"
+V594,pervasive computing and communications
+V595,pervasive technologies related to assistive environments
+V596,predictive models in software engineering
+V597,principles and practice of constraint programming
+V598,principles of distributed computing
+V599,programming language design and implementation
+V600,rapid system prototyping
+V601,real time systems symposium
+V602,real time technology and applications symposium
+V603,real-time systems symposium
+V604,rewriting techniques and applications
+V605,robot and human interactive communication
+V606,robotics and biomimetics
+V607,secure software integration and reliability improvement
+V608,secure web services
+V609,self adaptive and self organizing systems
+V610,self-adaptive and self-organizing systems
+V611,"semantics, knowledge and grid"
+V612,sensor mesh and ad hoc communications and networks
+V613,signal processing systems
+V614,signal-image technology and internet-based systems
+V615,soft computing and pattern recognition
+V616,software engineering and formal methods
+V617,software product lines
+V618,source code analysis and manipulation
+V619,spoken language technology workshop
+V620,statistical and scientific database management
+V621,supercomputing conference
+V622,symposium on applications and the internet
+V623,symposium on cloud computing
+V624,symposium on computer architecture and high performance computing
+V625,symposium on discrete algorithms
+V626,"symposium on languages, applications and technologies"
+V627,symposium on operating systems principles
+V628,symposium on principles of database systems
+V629,symposium on reliable distributed systems
+V630,symposium on search based software engineering
+V631,symposium on the theory of computing
+V632,symposium on theoretical aspects of computer science
+V633,systems man and cybernetics
+V634,"systems, man and cybernetics"
+V635,tests and proofs
+V636,text speech and dialogue
+V637,traffic monitoring and analysis
+V638,types in languages design and implementation
+V639,ubiquitous computing
+V640,ubiquitous intelligence and computing
+V641,usenix conference on file and storage technologies
+V642,usenix technical conference
+V643,vehicular networking conference
+V644,vehicular technology conference
+V645,very large data bases
+V646,virtual environments human computer interfaces and measurement systems
+V647,virtual execution environments
+V648,virtual reality software and technology
+V649,vision modeling and visualization
+V650,web age information management
+V651,web intelligence
+V652,winter simulation conference
+V653,wireless algorithms systems and applications
+V654,"wireless and mobile computing, networking and communications"
+V655,wireless and optical communications networks
+V656,wireless communications and networking conference
+V657,wireless personal multimedia communications
+V658,working conference on reverse engineering
+V659,working ieee/ifip conference on software architecture
+V660,workshop on applications of computer vision
+V661,workshop on image analysis for multimedia interactive services
+V662,workshop on internet and network economics
+V663,workshops on enabling technologies: infrastracture for collaborative enterprises
+V664,world congress on computational intelligence
+V665,world of wireless mobile and multimedia networks

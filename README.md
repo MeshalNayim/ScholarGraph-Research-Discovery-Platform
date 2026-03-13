@@ -28,57 +28,55 @@ docker compose -f infra/docker-compose.yml up -d
 #### 2) Create a virtual environment and install deps
 
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
+python -m venv .venv
+.venv\Scripts\activate
 pip install -r requirements.txt
 pip install -e packages/pipeline
 ```
 
-#### 3) Copy env and fill in values as needed
+#### 3) Prepare input files
+
+The current ingestion workflow uses:
+
+- `data/raw/matched_main.csv` for Postgres + Qdrant
+- Neo4j pre-generated CSV bundle in `data/raw/`:
+	- `papers.csv`
+	- `authors.csv`
+	- `venues.csv`
+	- `wrote.csv`
+	- `paper_venue.csv`
+	- `citations.csv`
+
+These default paths are configured in `packages/pipeline/src/pipeline/settings.py`.
+
+#### 4) Ingest data
+
+Load fresh data into all three stores:
 
 ```bash
-cp .env.example .env
+python -m pipeline.cli ingest-selected --truncate --include-neo4j
 ```
 
-#### 4) Choose a source dataset (CSV → Parquet)
-
-The ingestion pipeline prefers Parquet for speed and convenience. Two common options:
-
-- **Full dataset**: `data/raw/dblp-v10.parquet` (already generated from the CSV)
-
-You can still pass a CSV path; the code will detect the extension and fall back to CSV reading when needed.
-
-#### 5) Ingest a subset (recommended for development)
-
-Examples:
-
-- From the **full Parquet**:
+If Neo4j is already prepared and you only want Postgres + Qdrant:
 
 ```bash
-python3 -m pipeline.cli --csv data/raw/dblp-v10.parquet --limit 5000
+python -m pipeline.cli ingest-selected --truncate
 ```
 
-If you want to **wipe and reload everything fresh** (all three stores), add `--truncate` to either command:
+#### 5) Run the API (terminal 1)
 
 ```bash
-python3 -m pipeline.cli --csv data/raw/dblp-v10.parquet --limit 5000 --truncate
-```
-
-#### 6) Run the API (terminal 1)
-
-```bash
-cd /Users/js/Downloads/DSC202_Project_V2
-source .venv/bin/activate
 uvicorn apps.api.main:app --reload --port 8000
 ```
 
-6) Run the Streamlit UI (terminal 2):
+#### 6) Run the Streamlit UI (terminal 2)
 
 ```bash
-cd /Users/js/Downloads/DSC202_Project_V2
-source .venv/bin/activate
 streamlit run apps/web/app.py
 ```
 
-Once both are running, open the Streamlit URL (typically `http://localhost:8501`) in your browser and use the tabs to exercise the Qdrant, Neo4j, and Postgres-backed queries.
+Open:
+
+- API docs: `http://localhost:8000/docs`
+- Streamlit app: `http://localhost:8501`
 

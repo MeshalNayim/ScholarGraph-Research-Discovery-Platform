@@ -75,11 +75,11 @@ def top_collaborators(limit: int = 20) -> dict[str, Any]:
     """
     driver = neo4j_driver()
     query = """
-    MATCH (a1:Author)-[:AUTHORED]->(p:Paper)<-[:AUTHORED]-(a2:Author)
-    WHERE a1.name < a2.name
+    MATCH (a1:Author)-[:WROTE]->(p:Paper)<-[:WROTE]-(a2:Author)
+    WHERE a1.authorName < a2.authorName
     WITH a1, a2, count(DISTINCT p) AS joint_papers
     ORDER BY joint_papers DESC
-    RETURN a1.name AS author1, a2.name AS author2, joint_papers
+    RETURN a1.authorName AS author1, a2.authorName AS author2, joint_papers
     LIMIT $limit
     """
     with driver.session() as s:
@@ -99,10 +99,10 @@ def indirect_citers(paper_id: str, max_hops: int = 3, limit: int = 20) -> dict[s
     """
     driver = neo4j_driver()
     query = f"""
-    MATCH (target:Paper {{id: $paper_id}})
+    MATCH (target:Paper {{paperId: $paper_id}})
     MATCH path = (src:Paper)-[:CITES*1..{max_hops}]->(target)
     WITH src, min(length(path)) AS hops
-    RETURN src.id AS paper_id, src.title AS title, hops
+    RETURN src.paperId AS paper_id, src.title AS title, hops
     ORDER BY hops ASC
     LIMIT $limit
     """
@@ -132,9 +132,9 @@ def author_clusters_by_venue(venue: str, top_k: int = 5) -> dict[str, Any]:
             """
             CALL gds.graph.project.cypher(
               'venueGraph',
-              'MATCH (a:Author)-[:AUTHORED]->(p:Paper) WHERE p.venue = $venue RETURN id(a) AS id',
-              'MATCH (a1:Author)-[:AUTHORED]->(p:Paper)<-[:AUTHORED]-(a2:Author)
-               WHERE p.venue = $venue AND id(a1) < id(a2)
+              'MATCH (a:Author)-[:WROTE]->(p:Paper)-[:PUBLISHED_IN]->(v:Venue) WHERE v.venueName = $venue RETURN id(a) AS id',
+              'MATCH (a1:Author)-[:WROTE]->(p:Paper)<-[:WROTE]-(a2:Author)
+               WHERE (p)-[:PUBLISHED_IN]->(v:Venue {venueName: $venue}) AND id(a1) < id(a2)
                RETURN id(a1) AS source, id(a2) AS target, count(*) AS weight',
               {parameters: {venue: $venue}}
             )
@@ -223,7 +223,7 @@ def bridge_authors(limit: int = 20) -> dict[str, Any]:
             CALL gds.graph.project.cypher(
               'coauthorGraph',
               'MATCH (a:Author) RETURN id(a) AS id',
-              'MATCH (a1:Author)-[:AUTHORED]->(p:Paper)<-[:AUTHORED]-(a2:Author)\n'
+              'MATCH (a1:Author)-[:WROTE]->(p:Paper)<-[:WROTE]-(a2:Author)\n'
               + 'WHERE id(a1) < id(a2)\n'
               + 'RETURN id(a1) AS source, id(a2) AS target, count(*) AS weight'
             )
@@ -237,7 +237,7 @@ def bridge_authors(limit: int = 20) -> dict[str, Any]:
                 CALL gds.betweenness.stream('coauthorGraph', {relationshipWeightProperty: 'weight'})
                 YIELD nodeId, score
                 WITH gds.util.asNode(nodeId) AS a, score
-                RETURN a.name AS author, score
+                RETURN a.authorName AS author, score
                 ORDER BY score DESC
                 LIMIT $limit
                 """,
@@ -363,10 +363,10 @@ def central_but_undercited(limit: int = 20) -> dict[str, Any]:
             r.data()
             for r in s.run(
                 """
-                MATCH (a:Author)-[:AUTHORED]->(:Paper)<-[:AUTHORED]-(b:Author)
+                MATCH (a:Author)-[:WROTE]->(:Paper)<-[:WROTE]-(b:Author)
                 WHERE a <> b
                 WITH a, count(DISTINCT b) AS coauthor_degree
-                RETURN a.name AS author, coauthor_degree
+                RETURN a.authorName AS author, coauthor_degree
                 ORDER BY coauthor_degree DESC
                 LIMIT $limit
                 """,
@@ -433,13 +433,13 @@ def topics_connected_via_coauthorship(q: str, k: int = 30) -> dict[str, Any]:
     with driver.session() as s:
         res = s.run(
             """
-            MATCH (p:Paper)<-[:AUTHORED]-(a:Author)
-            WHERE p.id IN $paper_ids
+            MATCH (p:Paper)<-[:WROTE]-(a:Author)
+            WHERE p.paperId IN $paper_ids
             WITH collect(DISTINCT a) AS authors
             UNWIND authors AS a1
             UNWIND authors AS a2
             WITH a1, a2 WHERE a1 <> a2
-            MATCH (a1)-[:AUTHORED]->(:Paper)<-[:AUTHORED]-(a2)
+            MATCH (a1)-[:WROTE]->(:Paper)<-[:WROTE]-(a2)
             RETURN count(DISTINCT a1) AS author_count, count(*) AS coauth_links
             """,
             paper_ids=paper_ids,

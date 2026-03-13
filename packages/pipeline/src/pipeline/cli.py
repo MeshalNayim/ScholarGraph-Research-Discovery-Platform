@@ -8,7 +8,13 @@ import typer
 from qdrant_client import QdrantClient
 
 from .dblp import iter_batches, iter_dblp_papers
-from .neo4j_loader import clear_graph, ensure_constraints, neo4j_driver, upsert_graph
+from .neo4j_loader import (
+    clear_graph,
+    ensure_constraints,
+    load_graph_from_csv_files,
+    neo4j_driver,
+    upsert_graph,
+)
 from .postgres import (
     ensure_postgres_schema,
     truncate_all,
@@ -77,6 +83,87 @@ def ingest(
     pg.close()
 
     typer.echo(f"Done in {time.time() - t0:.1f}s")
+
+
+@app.command()
+def ingest_selected(
+    filtered_csv: str = typer.Option(
+        settings.dblp_filtered_csv_path,
+        help="Path to already-filtered DBLP CSV/Parquet to ingest directly.",
+    ),
+    batch_size: int = typer.Option(500, help="Batch size for inserts/upserts"),
+    truncate: bool = typer.Option(
+        False,
+        "--truncate",
+        help="Truncate Postgres and drop Qdrant collection before loading filtered dataset.",
+    ),
+    include_neo4j: bool = typer.Option(
+        False,
+        "--include-neo4j",
+        help="Also upsert filtered dataset into Neo4j.",
+    ),
+):
+    """
+    Ingest an already-filtered dataset directly into Postgres/Qdrant (and optionally Neo4j).
+    """
+    t0 = time.time()
+    typer.echo(f"Using filtered dataset: {filtered_csv}")
+
+    # Postgres
+    pg = psycopg.connect(settings.postgres_dsn())
+    ensure_postgres_schema(pg)
+
+    # Neo4j (optional)
+    driver = None
+    if include_neo4j:
+        driver = neo4j_driver(settings.neo4j_uri, settings.neo4j_user, settings.neo4j_password)
+        ensure_constraints(driver)
+
+    # Qdrant + embeddings
+    qdrant = QdrantClient(url=settings.qdrant_url)
+    embedder = embedder_fastembed(settings.fastembed_model)
+    sample_vec = next(embedder.embed(["dimension probe"]))
+    vector_size = len(sample_vec)
+
+    if truncate:
+        typer.echo("Truncating Postgres tables...")
+        truncate_all(pg)
+        typer.echo(f"Dropping Qdrant collection '{settings.qdrant_collection}' if it exists...")
+        drop_collection_if_exists(qdrant, settings.qdrant_collection)
+        if include_neo4j and driver is not None:
+            typer.echo("Clearing Neo4j graph...")
+            clear_graph(driver)
+
+    if include_neo4j and driver is not None:
+        typer.echo("Loading Neo4j graph directly from CSV files...")
+        load_graph_from_csv_files(
+            driver=driver,
+            papers_csv=settings.neo4j_papers_csv_path,
+            authors_csv=settings.neo4j_authors_csv_path,
+            venues_csv=settings.neo4j_venues_csv_path,
+            wrote_csv=settings.neo4j_wrote_csv_path,
+            paper_venue_csv=settings.neo4j_paper_venue_csv_path,
+            citations_csv=settings.neo4j_citations_csv_path,
+            batch_size=max(batch_size, 1000),
+        )
+
+    ensure_collection(qdrant, settings.qdrant_collection, vector_size)
+
+    ingested = 0
+    papers_iter = iter_dblp_papers(filtered_csv, limit=None)
+    for batch in iter_batches(papers_iter, batch_size=batch_size):
+        upsert_papers(pg, batch)
+        upsert_authors_and_links(pg, batch)
+        upsert_citations(pg, batch)
+        upsert_vectors(qdrant, settings.qdrant_collection, embedder, batch)
+
+        ingested += len(batch)
+
+    if driver is not None:
+        driver.close()
+    pg.close()
+
+    typer.echo(f"Ingested {ingested} papers from filtered dataset in {time.time() - t0:.1f}s")
 
 
 if __name__ == "__main__":

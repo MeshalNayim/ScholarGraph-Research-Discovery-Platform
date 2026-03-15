@@ -71,12 +71,16 @@ uvicorn apps.api.main:app --reload --port 8000
 
 #### 6) Run the Streamlit UI (terminal 2)
 
+From the project root:
+
 ```bash
 streamlit run apps/web/app.py
 ```
 
+If your browser doesn’t open automatically, check the terminal for the **Local URL** (e.g. `http://localhost:8501` or `http://localhost:8503` if 8501 is in use) and open that URL manually.
+
 Open:
 
 - API docs: `http://localhost:8000/docs`
-- Streamlit app: `http://localhost:8501`
+- Streamlit app: `http://localhost:8501` (or the port shown in the Streamlit terminal)
 

@@ -20,7 +20,9 @@ def pg_conn():
 
 
 def neo4j_driver():
-    return GraphDatabase.driver(settings.neo4j_uri, auth=(settings.neo4j_user, settings.neo4j_password))
+    return GraphDatabase.driver(
+        settings.neo4j_uri, auth=(settings.neo4j_user, settings.neo4j_password)
+    )
 
 
 def qdrant_client():
@@ -92,7 +94,9 @@ def top_collaborators(limit: int = 20) -> dict[str, Any]:
 
 
 @app.get("/indirect_citers")
-def indirect_citers(paper_id: str, max_hops: int = 3, limit: int = 20) -> dict[str, Any]:
+def indirect_citers(
+    paper_id: str, max_hops: int = 3, limit: int = 20
+) -> dict[str, Any]:
     """
     Suggest relevant papers that cite a given paper indirectly.
     Uses Neo4j path queries over the citation graph.
@@ -125,19 +129,23 @@ def author_clusters_by_venue(venue: str, top_k: int = 5) -> dict[str, Any]:
     """
     driver = neo4j_driver()
     with driver.session() as s:
-        exists = s.run("CALL gds.graph.exists('venueGraph') YIELD exists RETURN exists").single()
+        exists = s.run(
+            "CALL gds.graph.exists('venueGraph') YIELD exists RETURN exists"
+        ).single()
         if exists and exists.get("exists"):
-            s.run("CALL gds.graph.drop('venueGraph') YIELD graphName RETURN graphName").consume()
+            s.run(
+                "CALL gds.graph.drop('venueGraph') YIELD graphName RETURN graphName"
+            ).consume()
+
+        # Use Cypher aggregation projection (modern GDS syntax)
         s.run(
             """
-            CALL gds.graph.project.cypher(
-              'venueGraph',
-              'MATCH (a:Author)-[:WROTE]->(p:Paper)-[:PUBLISHED_IN]->(v:Venue) WHERE v.venueName = $venue RETURN id(a) AS id',
-              'MATCH (a1:Author)-[:WROTE]->(p:Paper)<-[:WROTE]-(a2:Author)
-               WHERE (p)-[:PUBLISHED_IN]->(v:Venue {venueName: $venue}) AND id(a1) < id(a2)
-               RETURN id(a1) AS source, id(a2) AS target, count(*) AS weight',
-              {parameters: {venue: $venue}}
-            )
+            MATCH (a1:Author)-[:WROTE]->(p:Paper)<-[:WROTE]-(a2:Author)
+            WHERE (p)-[:PUBLISHED_IN]->(:Venue {venueName: $venue})
+              AND id(a1) < id(a2)
+            WITH a1, a2, count(p) AS weight
+            WITH gds.graph.project('venueGraph', a1, a2, {relationshipProperties: {weight: weight}}) AS g
+            RETURN g.graphName AS graph, g.nodeCount AS nodes, g.relationshipCount AS rels
             """,
             venue=venue,
         ).consume()
@@ -156,6 +164,10 @@ def author_clusters_by_venue(venue: str, top_k: int = 5) -> dict[str, Any]:
             )
         )
         top = [r.data() for r in communities]
+
+        s.run(
+            "CALL gds.graph.drop('venueGraph') YIELD graphName RETURN graphName"
+        ).consume()
     driver.close()
     return {
         "venue": venue,
@@ -214,19 +226,22 @@ def bridge_authors(limit: int = 20) -> dict[str, Any]:
     """
     driver = neo4j_driver()
     with driver.session() as s:
-        exists = s.run("CALL gds.graph.exists('coauthorGraph') YIELD exists RETURN exists").single()
+        exists = s.run(
+            "CALL gds.graph.exists('coauthorGraph') YIELD exists RETURN exists"
+        ).single()
         if exists and exists.get("exists"):
-            s.run("CALL gds.graph.drop('coauthorGraph') YIELD graphName RETURN graphName").consume()
+            s.run(
+                "CALL gds.graph.drop('coauthorGraph') YIELD graphName RETURN graphName"
+            ).consume()
 
+        # Use Cypher aggregation projection (modern GDS syntax)
         s.run(
             """
-            CALL gds.graph.project.cypher(
-              'coauthorGraph',
-              'MATCH (a:Author) RETURN id(a) AS id',
-              'MATCH (a1:Author)-[:WROTE]->(p:Paper)<-[:WROTE]-(a2:Author)\n'
-              + 'WHERE id(a1) < id(a2)\n'
-              + 'RETURN id(a1) AS source, id(a2) AS target, count(*) AS weight'
-            )
+            MATCH (a1:Author)-[:WROTE]->(p:Paper)<-[:WROTE]-(a2:Author)
+            WHERE id(a1) < id(a2)
+            WITH a1, a2, count(p) AS weight
+            WITH gds.graph.project('coauthorGraph', a1, a2, {relationshipProperties: {weight: weight}}) AS g
+            RETURN g.graphName AS graph, g.nodeCount AS nodes, g.relationshipCount AS rels
             """
         ).consume()
 
@@ -244,7 +259,9 @@ def bridge_authors(limit: int = 20) -> dict[str, Any]:
                 limit=limit,
             )
         ]
-        s.run("CALL gds.graph.drop('coauthorGraph') YIELD graphName RETURN graphName").consume()
+        s.run(
+            "CALL gds.graph.drop('coauthorGraph') YIELD graphName RETURN graphName"
+        ).consume()
     driver.close()
     return {
         "results": rows,
@@ -270,7 +287,11 @@ def citations_vs_similarity(q: str, k: int = 20) -> dict[str, Any]:
         with_payload=True,
     )
     hits = res.points
-    paper_ids = [h.payload.get("paper_id") for h in hits if h.payload and h.payload.get("paper_id")]
+    paper_ids = [
+        h.payload.get("paper_id")
+        for h in hits
+        if h.payload and h.payload.get("paper_id")
+    ]
 
     rows: list[dict[str, Any]] = []
     if paper_ids:
@@ -283,7 +304,10 @@ def citations_vs_similarity(q: str, k: int = 20) -> dict[str, Any]:
                 """,
                 (paper_ids,),
             )
-            by_id = {r[0]: {"n_citation": r[1], "year": r[2], "venue": r[3], "title": r[4]} for r in cur.fetchall()}
+            by_id = {
+                r[0]: {"n_citation": r[1], "year": r[2], "venue": r[3], "title": r[4]}
+                for r in cur.fetchall()
+            }
 
         for h in hits:
             pid = (h.payload or {}).get("paper_id")
@@ -309,7 +333,9 @@ def citations_vs_similarity(q: str, k: int = 20) -> dict[str, Any]:
 
 
 @app.get("/cross_field_relevance")
-def cross_field_relevance(source_venue: str, target_venue: str, q: str, k: int = 20) -> dict[str, Any]:
+def cross_field_relevance(
+    source_venue: str, target_venue: str, q: str, k: int = 20
+) -> dict[str, Any]:
     """
     Which papers in one field could be relevant to another based on content similarity?
     Uses Postgres to constrain candidate papers by venue, Qdrant for semantic search,
@@ -427,7 +453,11 @@ def topics_connected_via_coauthorship(q: str, k: int = 30) -> dict[str, Any]:
         with_payload=True,
     )
     hits = res.points
-    paper_ids = [h.payload.get("paper_id") for h in hits if h.payload and h.payload.get("paper_id")]
+    paper_ids = [
+        h.payload.get("paper_id")
+        for h in hits
+        if h.payload and h.payload.get("paper_id")
+    ]
 
     driver = neo4j_driver()
     with driver.session() as s:
@@ -454,4 +484,3 @@ def topics_connected_via_coauthorship(q: str, k: int = 30) -> dict[str, Any]:
         "store_justification": "Topic similarity is derived from embeddings (Qdrant), while connectivity is a co-authorship network property (Neo4j).",
         "note": "For a richer notion of 'topic', add topic labels via clustering or taxonomy and compute connectivity per topic label.",
     }
-

@@ -34,6 +34,58 @@ def health() -> dict[str, str]:
     return {"status": "ok"}
 
 
+@app.get("/stats")
+def stats() -> dict[str, Any]:
+    """Dashboard statistics from all three stores."""
+    # Postgres counts
+    with pg_conn() as conn, conn.cursor() as cur:
+        cur.execute("SELECT count(*) FROM papers")
+        total_papers = cur.fetchone()[0]
+        cur.execute("SELECT count(*) FROM authors")
+        total_authors = cur.fetchone()[0]
+        cur.execute(
+            "SELECT count(DISTINCT venue) FROM papers WHERE venue IS NOT NULL AND venue != ''"
+        )
+        total_venues = cur.fetchone()[0]
+        cur.execute("SELECT COALESCE(SUM(n_citation),0) FROM papers")
+        total_citations = cur.fetchone()[0]
+        cur.execute(
+            "SELECT venue, count(*) AS cnt FROM papers WHERE venue IS NOT NULL AND venue != '' "
+            "GROUP BY venue ORDER BY cnt DESC LIMIT 10"
+        )
+        top_venues = [{"venue": r[0], "count": r[1]} for r in cur.fetchall()]
+        cur.execute(
+            "SELECT year, count(*) AS cnt FROM papers WHERE year IS NOT NULL "
+            "GROUP BY year ORDER BY year"
+        )
+        papers_by_year = [{"year": r[0], "count": r[1]} for r in cur.fetchall()]
+
+    # Neo4j counts
+    driver = neo4j_driver()
+    with driver.session() as s:
+        neo4j_nodes = s.run("MATCH (n) RETURN count(n) AS c").single()["c"]
+        neo4j_rels = s.run("MATCH ()-[r]->() RETURN count(r) AS c").single()["c"]
+    driver.close()
+
+    # Qdrant count
+    qc = qdrant_client()
+    col = qc.get_collection(settings.qdrant_collection)
+    qdrant_vectors = col.points_count
+
+    return {
+        "postgres": {
+            "papers": total_papers,
+            "authors": total_authors,
+            "venues": total_venues,
+            "total_citations": total_citations,
+            "top_venues": top_venues,
+            "papers_by_year": papers_by_year,
+        },
+        "neo4j": {"nodes": neo4j_nodes, "relationships": neo4j_rels},
+        "qdrant": {"vectors": qdrant_vectors},
+    }
+
+
 @app.get("/semantic_search")
 def semantic_search(q: str, k: int = 10) -> dict[str, Any]:
     """

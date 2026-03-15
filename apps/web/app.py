@@ -79,6 +79,7 @@ This app is a query router UI over three stores:
 
 Tab guide:
 
+- `Dashboard`: overview stats from all three databases.
 - `Semantic search`: text query to retrieve semantically similar papers.
 - `Graph exploration`: co-authorship and indirect citation traversals.
 - `Cross-store analytics`: combined vector + SQL + graph insights.
@@ -87,13 +88,57 @@ Tab guide:
     )
 
 
-tab1, tab2, tab3, tab4 = st.tabs(
-    ["Semantic search", "Graph exploration", "Cross-store analytics", "Graph analytics (GDS)"]
+tab0, tab1, tab2, tab3, tab4 = st.tabs(
+    [
+        "Dashboard",
+        "Semantic search",
+        "Graph exploration",
+        "Cross-store analytics",
+        "Graph analytics (GDS)",
+    ]
 )
+
+with tab0:
+    st.caption("At-a-glance statistics from Postgres, Neo4j, and Qdrant.")
+    data = _call_api("/stats")
+    if data:
+        pg = data.get("postgres", {})
+        n4 = data.get("neo4j", {})
+        qd = data.get("qdrant", {})
+
+        c1, c2, c3, c4 = st.columns(4)
+        c1.metric("Papers", f"{pg.get('papers', 0):,}")
+        c2.metric("Authors", f"{pg.get('authors', 0):,}")
+        c3.metric("Venues", f"{pg.get('venues', 0):,}")
+        c4.metric("Total Citations", f"{pg.get('total_citations', 0):,}")
+
+        c5, c6, c7 = st.columns(3)
+        c5.metric("Neo4j Nodes", f"{n4.get('nodes', 0):,}")
+        c6.metric("Neo4j Relationships", f"{n4.get('relationships', 0):,}")
+        c7.metric("Qdrant Vectors", f"{qd.get('vectors', 0):,}")
+
+        import pandas as pd
+
+        col_left, col_right = st.columns(2)
+        with col_left:
+            st.subheader("Top 10 Venues")
+            venues = pg.get("top_venues", [])
+            if venues:
+                df_v = pd.DataFrame(venues)
+                st.bar_chart(df_v.set_index("venue")["count"])
+        with col_right:
+            st.subheader("Papers by Year")
+            pby = pg.get("papers_by_year", [])
+            if pby:
+                df_y = pd.DataFrame(pby)
+                st.bar_chart(df_y.set_index("year")["count"])
 
 with tab1:
     st.caption("Find papers by meaning, not keyword overlap.")
-    q = st.text_input("Research question / query", value="graph neural networks for citation prediction")
+    q = st.text_input(
+        "Research question / query",
+        value="graph neural networks for citation prediction",
+    )
     k = st.slider("Top K", 5, 30, 10)
     if st.button("Search"):
         data = _call_api("/semantic_search", {"q": q, "k": k})
@@ -104,7 +149,10 @@ with tab1:
                 st.metric("Results", len(rows))
             with c2:
                 best = rows[0]["score"] if rows else None
-                st.metric("Best similarity score", f"{best:.4f}" if isinstance(best, float) else "n/a")
+                st.metric(
+                    "Best similarity score",
+                    f"{best:.4f}" if isinstance(best, float) else "n/a",
+                )
             _table(rows)
             st.info(data["store_justification"])
 
@@ -125,7 +173,10 @@ with tab2:
         if not pid.strip():
             st.warning("Enter a paper UUID.")
         else:
-            data = _call_api("/indirect_citers", {"paper_id": pid.strip(), "max_hops": hops, "limit": 20})
+            data = _call_api(
+                "/indirect_citers",
+                {"paper_id": pid.strip(), "max_hops": hops, "limit": 20},
+            )
             if data:
                 _table(data.get("results", []))
                 st.info(data["store_justification"])
@@ -144,15 +195,21 @@ with tab3:
     st.subheader("Emerging trends (recent papers similar to query)")
     since = st.number_input("Since year", value=2020, min_value=1950, max_value=2100)
     if st.button("Find emerging papers"):
-        data = _call_api("/emerging_trends", {"q": q2, "since_year": int(since), "k": 20})
+        data = _call_api(
+            "/emerging_trends", {"q": q2, "since_year": int(since), "k": 20}
+        )
         if data:
             _table(data.get("results", []))
             st.info(data["store_justification"])
 
     st.divider()
     st.subheader("Cross-field relevance (by venue)")
-    source_venue = st.text_input("Source venue (label only, MVP)", value="Neurocomputing")
-    target_venue = st.text_input("Target venue", value="international conference on computer vision")
+    source_venue = st.text_input(
+        "Source venue (label only, MVP)", value="Neurocomputing"
+    )
+    target_venue = st.text_input(
+        "Target venue", value="international conference on computer vision"
+    )
     if st.button("Find cross-field relevant papers"):
         data = _call_api(
             "/cross_field_relevance",
@@ -205,4 +262,3 @@ with tab4:
         if data:
             _table(data.get("results", []))
         st.info(data["store_justification"])
-

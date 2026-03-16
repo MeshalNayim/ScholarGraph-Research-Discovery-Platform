@@ -142,13 +142,14 @@ Tab guide:
     )
 
 
-tab_dashboard, tab_filter, tab2, tab3, tab4 = st.tabs(
+tab_dashboard, tab_filter, tab2, tab3, tab4, tab_glossary = st.tabs(
     [
         "Dashboard",
         "Paper search & filters",
         "Collaboration & citation networks",
         "Topic insights & trends",
         "Advanced network analysis",
+        "Glossary",
     ]
 )
 
@@ -550,3 +551,93 @@ with tab4:
         if data:
             _table(data.get("results", []))
         st.info(data["store_justification"])
+
+
+with tab_glossary:
+    st.subheader("Glossary of metrics and views")
+    st.caption("Short explanations of the main numbers and analysis views in this app.")
+
+    st.markdown("#### Dashboard")
+    st.markdown(
+        """
+- **Papers**: Number of papers in the dataset (or in the current topic scope).  
+  Use this to understand how big your topic slice is.
+
+- **Authors**: Number of distinct authors who wrote those papers.  
+  Helps gauge how many people are active in this area.
+
+- **Venues**: Number of distinct conferences/journals where these papers appeared.  
+  Shows how widely the topic is spread across venues.
+
+- **Total citations**: Sum of citation counts for all papers in view.  
+  Indicates how much attention this body of work has received.
+
+- **Graph nodes**: Count of paper and author nodes in the collaboration/citation graph (within scope if set).  
+  Reflects how much of the graph is involved in your current topic.
+
+- **Graph relationships**: Number of authorship and citation links between those nodes.  
+  Higher values mean denser collaboration and citation structure.
+
+- **Semantic vectors**: Number of papers that have embeddings for semantic search (within scope if set).  
+  These are the papers the “Topic query” tools can match by meaning, not just keywords.
+        """
+    )
+
+    st.markdown("#### Paper search & filters")
+    st.markdown(
+        """
+- **Basic filters results table**: Each row is a paper matching your year/venue/author/citation filters.  
+  Use this as your main “paper finder” and export list.
+
+- **Publication trends & aggregates** (Advanced analytics):  
+  Papers per year and average citations per year show how activity and impact evolve over time.
+
+- **Venue analytics**:  
+  Top venues and their average citations help you see where most work (and impact) is concentrated.
+
+- **Author analytics**:  
+  Authors by paper count and by total citations highlight prolific and highly cited researchers.
+        """
+    )
+
+    st.markdown("#### Collaboration & citation networks")
+    st.markdown(
+        """
+- **Top collaborators**: Pairs of authors who have written the most papers together (within topic scope if set).  
+  Use this to spot strong partnerships or tightly knit labs.
+
+- **Indirect citers of a paper**: Papers that cite a chosen paper directly (1 hop) or via chains of citations (2+ hops).  
+  Direct citers show immediate impact; indirect citers reveal influence that travels through intermediate work.
+        """
+    )
+
+    st.markdown("#### Topic insights & trends")
+    st.markdown(
+        """
+- **Citations vs similarity**: For a topic query, shows how semantically close each paper is to your query and how cited it is.  
+  High similarity + high citations = canonical references; high similarity + low citations = promising but under-recognized work.
+
+- **Emerging trends**: Recent papers (by year) that are semantically close to your query.  
+  Use this to find the latest work you might have missed.
+
+- **Cross-field relevance (by venue)**: Papers in a target venue whose content matches your topic query.  
+  Helps discover work bringing your topic into new conferences/journals.
+
+- **Central but under-cited authors**: Authors who collaborate with many others but have relatively low total citations.  
+  Good candidates for rising or undervalued connectors in the community.
+
+- **Topics connected via co-authorship**: For a topic, reports how many authors and coauthor links exist among its papers.  
+  A higher average number of links per author means a more tightly connected research community around that topic.
+        """
+    )
+
+    st.markdown("#### Advanced network analysis")
+    st.markdown(
+        """
+- **Author clusters dominating a venue (Louvain)**: Groups of authors who frequently coauthor within a venue, plus how much of the venue’s output they account for.  
+  Use this to see which communities/labs dominate a conference or journal.
+
+- **Bridge authors (betweenness centrality)**: Authors that sit on many shortest paths between others in the coauthor graph.  
+  These are key connectors who link otherwise separate groups or subfields.
+        """
+    )

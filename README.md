@@ -59,6 +59,9 @@ Load fresh data into all three stores:
 python -m pipeline.cli ingest-selected --truncate --include-neo4j
 ```
 
+![App Home](assests/pic1.png)
+
+
 If Neo4j is already prepared and you only want Postgres + Qdrant:
 
 ```bash
@@ -85,4 +88,6 @@ Open:
 
 - API docs: `http://localhost:8000/docs`
 - Streamlit app: `http://localhost:8501` (or the port shown in the Streamlit terminal)
+
+![App Home](assests/pic2.png)
 

@@ -1,6 +1,6 @@
 ## Scientific Paper Knowledge Graph & Semantic Search
 
-![App Home](assests/pic1.png)
+![App Home](assests/pic3.png)
 
 This project ingests the DBLP CSV dataset into:
 
